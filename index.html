@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/cartoon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Hangman</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1>HANGMAN</h1>
+      <img src="img/cartoon.svg" width="300px" height="200px">
+      <div id="word" class="puzzle"></div>
+      <div id="end-message"></div>
+      <div id="counter"></div>
+      <button id="reset" class="button">Refresh</button>
+    </div>
+
+    <footer>
+      <p id="footer-text">&copy; App created by <a href="https://www.facebook.com/phil.octane/"><strong>Phil Jacks</strong></a></p>
+    </footer>
+
+    <script src="js/asyncSandbox.js"></script>
+    <script src="js/requests.js"></script>
+    <script src="js/hangman.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
