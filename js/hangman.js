@@ -7,7 +7,7 @@ class Hangman {
   }
   gameStatus() {
     let finished = this.word.every(
-      letter => this.guessedLetters.includes(letter) || letter === " "
+      (letter) => this.guessedLetters.includes(letter) || letter === " "
     );
     if (this.attempts === 0) {
       this.status = "failed";
@@ -20,7 +20,7 @@ class Hangman {
   get puzzle() {
     let puzzle = "";
 
-    this.word.forEach(letter => {
+    this.word.forEach((letter) => {
       if (this.guessedLetters.includes(letter) || letter === " ") {
         puzzle += letter;
       } else {
@@ -35,6 +35,21 @@ class Hangman {
     const isUnique = !this.guessedLetters.includes(guess);
     const isBadGuess = !this.word.includes(guess);
 
+    const warning = () => {
+      const warning = document.querySelector("#warning");
+      if (!isUnique) {
+        warning.innerHTML = `You've already used this letter`;
+        warning.classList.add("warning-text");
+      }
+    };
+
+    const removeWarning = () => {
+      document.querySelector("#warning").innerHTML = ``;
+    };
+
+    warning();
+    setTimeout(removeWarning, 3000);
+
     if (this.status !== "playing") {
       return;
     }
@@ -47,25 +62,23 @@ class Hangman {
     this.gameStatus();
   }
   get statusMessage() {
+    const message = document.getElementById("end-message");
+    const counter = document.querySelector("#counter");
+
     if (this.status === "playing") {
-      document.querySelector("#counter").innerHTML = `Guesses left: ${this.attempts
-        }`;
+      counter.innerHTML = `Guesses left: ${this.attempts}`;
     } else if (this.status === "failed") {
-      document.querySelector(
-        "#end-message"
-      ).innerHTML = `Nice try, the word was '${this.word.join("").toUpperCase()}'`;
-      document.querySelector("#counter").innerHTML = `Guesses left: ${this.attempts
-        }`;
-      document.getElementById("end-message").classList.add("fail-text");
+      message.innerHTML = `Nice try, the word was '${this.word
+        .join("")
+        .toUpperCase()}'`;
+      counter.innerHTML = `Guesses left: ${this.attempts}`;
+
+      message.classList.add("fail-text");
     } else if (this.status === "finished") {
-      document.querySelector(
-        "#end-message"
-      ).innerHTML = `Well done! You got it right!`;
-      document.querySelector("#counter").innerHTML = `Guesses left: ${this.attempts
-        }`;
-      document.getElementById("end-message").classList.remove("fail-text");
-      document.getElementById("end-message").classList.add("win-text");
+      message.innerHTML = `Well done! You got it right!`;
+      counter.innerHTML = `Guesses left: ${this.attempts}`;
+      message.classList.remove("fail-text");
+      message.classList.add("win-text");
     }
   }
 }
-
